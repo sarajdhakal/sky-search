@@ -98,7 +98,7 @@ export function PassengerSelector({ value, onChange }: PassengerSelectorProps) {
       {isOpen && (
         <div
           ref={dropdownRef}
-          className="absolute z-50 mt-2 bg-white rounded-xl shadow-xl border border-slate-200 p-4 w-72 animate-fade-in"
+          className="absolute z-10 mt-2 bg-white rounded-xl shadow-xl border border-slate-200 p-5 w-72 animate-fade-in"
         >
           <div className="space-y-4">
             {passengerTypes.map(({ key, label, description, min }) => (

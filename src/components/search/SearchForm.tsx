@@ -122,7 +122,7 @@ export function SearchForm({ onSearch, loading }: SearchFormProps) {
           {/* Dates */}
           <div
             className={cn(
-              "relative overflow-visible flex gap-4",
+              "relative z-10 overflow-visible flex gap-4",
               tripType === "roundtrip" ? "lg:col-span-4" : "lg:col-span-2"
             )}
           >
