@@ -146,61 +146,60 @@ export function FlightList({
       </div>
 
       {/* Pagination */}
-      {
-        totalPages > 1 && (
-          <div className="flex items-center justify-center gap-2 pt-6">
-            {/* Previous Button */}
-            <button
-              onClick={() => goToPage(currentPage - 1)}
-              disabled={currentPage === 1}
-              className={cn(
-                "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                currentPage === 1
-                  ? "text-slate-300 cursor-not-allowed"
-                  : "text-slate-600 hover:bg-slate-100"
-              )}
-            >
-              <ChevronLeft className="h-4 w-4" />
-              Prev
-            </button>
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 pt-6">
+          {/* Previous Button */}
+          <button
+            onClick={() => goToPage(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={cn(
+              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+              currentPage === 1
+                ? "text-slate-300 cursor-not-allowed"
+                : "text-slate-600 hover:bg-slate-100"
+            )}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Prev
+          </button>
 
-            {/* Page Numbers */}
-            <div className="flex items-center gap-1">
-              {getPageNumbers().map((page, index) => (
-                <button
-                  key={index}
-                  onClick={() => typeof page === "number" && goToPage(page)}
-                  disabled={page === "..."}
-                  className={cn(
-                    "min-w-[40px] h-10 rounded-lg text-sm font-medium transition-colors",
-                    page === currentPage
-                      ? "bg-blue-600 text-white"
-                      : page === "..."
-                        ? "text-slate-400 cursor-default"
-                        : "text-slate-600 hover:bg-slate-100"
-                  )}
-                >
-                  {page}
-                </button>
-              ))}
-            </div>
-
-            {/* Next Button */}
-            <button
-              onClick={() => goToPage(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className={cn(
-                "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                currentPage === totalPages
-                  ? "text-slate-300 cursor-not-allowed"
-                  : "text-slate-600 hover:bg-slate-100"
-              )}
-            >
-              Next
-              <ChevronRight className="h-4 w-4" />
-            </button>
+          {/* Page Numbers */}
+          <div className="flex items-center gap-1">
+            {getPageNumbers().map((page, index) => (
+              <button
+                key={index}
+                onClick={() => typeof page === "number" && goToPage(page)}
+                disabled={page === "..."}
+                className={cn(
+                  "min-w-[40px] h-10 rounded-lg text-sm font-medium transition-colors",
+                  page === currentPage
+                    ? "bg-blue-600 text-white"
+                    : page === "..."
+                      ? "text-slate-400 cursor-default"
+                      : "text-slate-600 hover:bg-slate-100"
+                )}
+              >
+                {page}
+              </button>
+            ))}
           </div>
-        )
+
+          {/* Next Button of Pagination*/}
+          <button
+            onClick={() => goToPage(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={cn(
+              "flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+              currentPage === totalPages
+                ? "text-slate-300 cursor-not-allowed"
+                : "text-slate-600 hover:bg-slate-100"
+            )}
+          >
+            Next
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+      )
       }
     </div >
   );

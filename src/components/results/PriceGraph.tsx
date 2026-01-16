@@ -9,14 +9,13 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  ReferenceLine,
   BarChart,
   Bar,
   Cell,
 } from "recharts";
 import { FlightOffer } from "@/types/flight";
 import { formatPrice, getStopsCount, formatHour } from "@/lib/utils";
-import { TrendingDown, TrendingUp, Minus } from "lucide-react";
+
 
 interface PriceGraphProps {
   flights: FlightOffer[];
