@@ -44,7 +44,6 @@ export function PassengerSelector({ value, onChange }: PassengerSelectorProps) {
       Math.min(9, newValue[type] + delta)
     );
 
-    // Ensure infants don't exceed adults
     if (type === "adults" && newValue.infants > newValue.adults) {
       newValue.infants = newValue.adults;
     }

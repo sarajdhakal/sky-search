@@ -7,7 +7,7 @@ import { DatePicker } from "./DatePicker";
 import { PassengerSelector } from "./PassengerSelector";
 import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
-import { ArrowRightLeft, Search } from "lucide-react";
+import { ArrowUpDown, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { format, addDays } from "date-fns";
 
@@ -62,14 +62,14 @@ export function SearchForm({ onSearch, loading }: SearchFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-6 lg:p-8 overflow-visible">
+      <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 p-4 sm:p-6 lg:p-8">
         {/* Trip Type Toggle */}
-        <div className="flex gap-2 mb-6">
+        <div className="flex gap-2 mb-4 sm:mb-6">
           <button
             type="button"
             onClick={() => setTripType("roundtrip")}
             className={cn(
-              "px-4 py-2 rounded-lg text-sm font-medium transition-all",
+              "px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-all",
               tripType === "roundtrip"
                 ? "bg-blue-100 text-blue-700"
                 : "text-slate-600 hover:bg-slate-100"
@@ -81,7 +81,7 @@ export function SearchForm({ onSearch, loading }: SearchFormProps) {
             type="button"
             onClick={() => setTripType("oneway")}
             className={cn(
-              "px-4 py-2 rounded-lg text-sm font-medium transition-all",
+              "px-3 sm:px-4 py-2 rounded-lg text-sm font-medium transition-all",
               tripType === "oneway"
                 ? "bg-blue-100 text-blue-700"
                 : "text-slate-600 hover:bg-slate-100"
@@ -92,47 +92,59 @@ export function SearchForm({ onSearch, loading }: SearchFormProps) {
         </div>
 
         {/* Main Search Fields */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-          {/* Origin & Destination */}
-          <div className="lg:col-span-5 flex items-end gap-2">
-            <AirportSearch
-              label="From"
-              placeholder="City or airport"
-              value={origin}
-              onChange={setOrigin}
-              icon="departure"
-            />
-            <button
-              type="button"
-              onClick={handleSwapLocations}
-              className="flex-shrink-0 h-12 w-12 rounded-xl border border-slate-200 bg-white flex items-center justify-center hover:bg-slate-50 hover:border-slate-300 transition-all mb-[2px]"
-              title="Swap locations"
-            >
-              <ArrowRightLeft className="h-5 w-5 text-slate-500" />
-            </button>
-            <AirportSearch
-              label="To"
-              placeholder="City or airport"
-              value={destination}
-              onChange={setDestination}
-              icon="arrival"
-            />
+        <div className="space-y-4">
+          {/* Origin & Destination - Stack on mobile */}
+          <div className="relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:items-end gap-3 sm:gap-4">
+              <div className="flex-1">
+                <AirportSearch
+                  label="From"
+                  placeholder="City or airport"
+                  value={origin}
+                  onChange={setOrigin}
+                  icon="departure"
+                />
+              </div>
+
+              {/* Swap button - positioned differently on mobile vs desktop */}
+              <button
+                type="button"
+                onClick={handleSwapLocations}
+                className="absolute right-0 top-6 sm:hidden z-10 h-10 w-10 rounded-full border border-slate-200 bg-white flex items-center justify-center hover:bg-slate-50 shadow-md"
+                title="Swap locations"
+              >
+                <ArrowUpDown className="h-4 w-4 text-slate-500" />
+              </button>
+
+              <button
+                type="button"
+                onClick={handleSwapLocations}
+                className="hidden sm:flex flex-shrink-0 h-12 w-12 rounded-xl border border-slate-200 bg-white items-center justify-center hover:bg-slate-50 hover:border-slate-300 transition-all self-end"
+                title="Swap locations"
+              >
+                <ArrowUpDown className="h-5 w-5 text-slate-500 rotate-90" />
+              </button>
+
+              <div className="flex-1">
+                <AirportSearch
+                  label="To"
+                  placeholder="City or airport"
+                  value={destination}
+                  onChange={setDestination}
+                  icon="arrival"
+                />
+              </div>
+            </div>
           </div>
 
-          {/* Dates */}
-          <div
-            className={cn(
-              "relative z-10 overflow-visible flex gap-4",
-              tripType === "roundtrip" ? "lg:col-span-4" : "lg:col-span-2"
-            )}
-          >
+          {/* Dates - Stack on mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <DatePicker
               label="Departure"
               value={departureDate}
               onChange={setDepartureDate}
               placeholder="Select date"
             />
-
             {tripType === "roundtrip" && (
               <DatePicker
                 label="Return"
@@ -144,11 +156,8 @@ export function SearchForm({ onSearch, loading }: SearchFormProps) {
             )}
           </div>
 
-          {/* Passengers & Class */}
-          <div className={cn(
-            "flex gap-4",
-            tripType === "roundtrip" ? "lg:col-span-3" : "lg:col-span-5"
-          )}>
+          {/* Passengers & Class - Stack on mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <PassengerSelector
               value={passengers}
               onChange={setPassengers}
@@ -168,13 +177,13 @@ export function SearchForm({ onSearch, loading }: SearchFormProps) {
         </div>
 
         {/* Search Button */}
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6">
           <Button
             type="submit"
             size="lg"
             loading={loading}
             disabled={!origin || !destination || !departureDate}
-            className="w-full lg:w-auto min-w-[200px]"
+            className="w-full"
           >
             <Search className="h-5 w-5 mr-2" />
             Search Flights

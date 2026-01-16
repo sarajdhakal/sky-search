@@ -63,7 +63,7 @@ export function Select({
           onClick={() => !disabled && setIsOpen(!isOpen)}
           disabled={disabled}
           className={cn(
-            "w-full h-12 px-4 pr-10 rounded-xl border border-slate-200 bg-white text-left flex items-center",
+            "w-full h-12 px-4 pr-10 mb-4 rounded-xl border border-slate-200 bg-white text-left flex items-center",
             "transition-all duration-200",
             "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
             "hover:border-slate-300",
